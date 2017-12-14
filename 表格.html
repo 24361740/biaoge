@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        outline: none;
+    }
+    section{
+        width:700px;
+        height:auto;
+        border: 1px solid #cccccc;
+        border-radius: 10px;
+        margin: 0 auto;
+        margin-top: 50px;
+    }
+    table{
+        width:700px;
+        height:auto;
+    }
+    th{
+        padding: 20px 12px;
+        border-radius: 10px;
+    }
+    td{
+        padding: 20px 12px;
+        text-align: center;
+        border-radius: 10px;
+        background-color: #f6f6f6;
+    }
+    button{
+        border: 0;
+        padding: 10px 12px;
+        float: right;
+        margin-right: 12px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+        background-color: #f5f5f5;
+    }
+</style>
+<body>
+    <section>
+        <table>
+            <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>籍贯</th>
+                <th>年龄</th>
+                <th>电话</th>
+                <th>操作</th>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>男</td>
+                <td>太原</td>
+                <td>20</td>
+                <td>999999</td>
+                <td class="del">删除</td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>男</td>
+                <td>太原</td>
+                <td>20</td>
+                <td>999999</td>
+                <td class="del">删除</td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>男</td>
+                <td>太原</td>
+                <td>20</td>
+                <td>999999</td>
+                <td class="del">删除</td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>男</td>
+                <td>太原</td>
+                <td>20</td>
+                <td>999999</td>
+                <td class="del">删除</td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>男</td>
+                <td>太原</td>
+                <td>20</td>
+                <td>999999</td>
+                <td class="del">删除</td>
+            </tr>
+        </table>
+        <button>添加</button>
+        <div style="clear:both;"></div>
+    </section>
+</body>
+</html>
+<script>
+    window.onload = function(){
+        let tbody = document.querySelector('tbody');
+        let button = document.querySelector('button');
+        tbody.ondblclick = function(e){
+            let target = e.target;
+            if(target.nodeName == 'TD' && target.className!= 'del'){
+                let oldv = target.innerText;
+                target.innerText = '';
+                let inputs = document.createElement('input');
+                inputs.setAttribute("autofocus", "autofocus");
+                target.appendChild(inputs);
+                inputs.focus();
+                inputs.value = oldv;
+                inputs.onblur = function(){
+                    let newv = inputs.value;
+                    target.removeChild(inputs);
+                    target.innerText = newv;
+                }
+            }else if(target.className == 'del'){
+                let trs = target.parentNode;
+                tbody.removeChild(trs);
+            }
+        }
+        button.onclick = function(){
+            tbody.innerHTML =tbody.innerHTML +`
+                <tr>
+                    <td>张三</td>
+                    <td>男</td>
+                    <td>山西</td>
+                    <td>1709</td>
+                    <td>123</td>
+                    <td class="del">删除</td>
+                </tr>`;
+        }
+    }
+</script>
